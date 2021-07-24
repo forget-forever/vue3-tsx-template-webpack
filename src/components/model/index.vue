@@ -11,7 +11,7 @@ import { onMounted } from '@vue/runtime-core'
 import { watchEffect } from 'vue'
 import router from '@/router'
 // eslint-disable-next-line no-unused-vars
-import { IData, IPage } from './interfaces'
+import { IData, IPage } from './type'
 
 interface IProps {
   page: IPage

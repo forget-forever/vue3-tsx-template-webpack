@@ -1,16 +1,9 @@
-<template>
-  <model :page="page" :scroll="true">
-    <h1>hellow world!</h1>
-    <h2 style="color: red;">{{greet}}</h2>
-  </model>
-</template>
-
-<script lang="ts">
 import { ref } from '@vue/reactivity'
 import model from '@/components/model/index.vue'
-import { IPage } from '@/components/model/interfaces'
+import { IPage } from '@/components/model/type'
+import {defineComponent} from 'vue'
 
-export default {
+export default defineComponent({
   name: 'Test',
   props: {
 
@@ -32,14 +25,15 @@ export default {
         over(0)
       },
       onScroll(pos: any) {
-        // console.log(pos)
+        console.log(pos)
       }
     }
     const greet = ref(1)
-    return {
-      page,
-      greet
-    }
+    return () => (
+      <model page={page} scroll={true}>
+        <h1>hellow world!</h1>
+        <h2 style="color: red;">{{greet}}</h2>
+      </model>
+    )
   },
-}
-</script>
+})

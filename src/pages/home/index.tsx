@@ -1,15 +1,9 @@
-<template>
-  <div @click="greet++">here is home page</div>
-  
-</template>
-
-<script lang="ts">
-import {inject, reactive, ref, watch} from 'vue'
+import {defineComponent, inject, reactive, ref, watch} from 'vue'
 // import store from '@/store'
 import router from '@/router'
 import globalData from '@/globalData'
 
-export default {
+export default defineComponent({
   name: 'Home',
   props: {},
   setup(props: {}) {
@@ -35,10 +29,8 @@ export default {
         console.log('home')
       }
     })
-    return {
-      greet,
-      data
-    }
+    return () => (
+      <div onClick={() => {greet.value++}}>here is home page</div>
+    )
   }
-}
-</script>
+})
