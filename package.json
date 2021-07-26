@@ -10,6 +10,7 @@
   "dependencies": {
     "better-scroll": "^2.2.1",
     "core-js": "^3.6.5",
+    "element-plus": "1.0.2-beta.55",
     "less": "^4.1.1",
     "less-loader": "^5.0.0",
     "store": "^2.0.12",
