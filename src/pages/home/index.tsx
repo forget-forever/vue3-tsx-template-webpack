@@ -20,7 +20,7 @@ export default defineComponent({
     let greet = ref(1)
     
     // globalData.pageFunction.index && globalData.pageFunction.index()
-    console.log(inject('fun'))
+    // console.log(inject('fun'))
 
     watch(router.currentRoute, (newValue) => {
       // console.log(oldValue)
