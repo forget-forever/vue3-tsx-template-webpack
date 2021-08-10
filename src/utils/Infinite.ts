@@ -74,26 +74,21 @@ export default class Infinite<P, T> {
   }
 
   private async getData(mode: 'next' | 'pre', params: P, refresh?: boolean) {
-    if (this.loading) {
-      if (this.showLoadingWarn) message.warning('加载中')
-      return Promise.reject(new Error('loading'));
-    }
-    this.loading = true;
     try {
       let { current } = this.params;
       const { pageSize } = this.params;
-      if (refresh) current = 1;
-      const res = await this.request({ ...params, current, pageSize });
-      this.loading = false;
       switch (mode) {
         case 'next':
-          this.params = { ...params, current: current + 1, pageSize };
+          current += 1;
           break;
         case 'pre':
-          this.params = { ...params, current: current - 1, pageSize };
+          current -= 1;
           break;
         default:
       }
+      if (refresh) current = 1;
+      const res = await this.request({ ...params, current, pageSize });
+      this.params = { ...params, current, pageSize };
       if (res.list.length < pageSize) {
         this.finish = true;
       } else {
