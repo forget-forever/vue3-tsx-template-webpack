@@ -4,7 +4,7 @@ export interface IData {
 
 export interface IPage {
   onshow?: () => void;
-  onPullingDown?: (over: (t: number) => void) => void;
-  onPullingUp?: (over: (t: number) => void) => void;
+  onPullingDown?: (over: (t: 'up' | 'down') => void) => void;
+  onPullingUp?: (over: (t: 'up' | 'down') => void) => void;
   onScroll?: (pos: any) => void
 }

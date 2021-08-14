@@ -73,9 +73,9 @@ export default {
       props.page.onPullingUp && bs.on('pullingUp', () => {
         props.page.onPullingUp && props.page.onPullingUp(pullOver)
       })
-      const pullOver = (type: number = 0) => {
+      const pullOver = (type: 'up' | 'down') => {
         switch(type){
-          case 0: bs.finishPullUp()
+          case 'up': bs.finishPullUp()
           break
           default: bs.finishPullDown()
         }

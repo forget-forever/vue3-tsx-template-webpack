@@ -1,5 +1,5 @@
 import { ref } from '@vue/reactivity'
-import model from '@/components/model/index.vue'
+import ModelPage from '@/components/model/index.vue'
 import { IPage } from '@/components/model/type'
 import {defineComponent} from 'vue'
 
@@ -9,20 +9,20 @@ export default defineComponent({
 
   },
   components: {
-    model
+    ModelPage
   },
   setup() {
     const page: IPage = {
       onshow() {
         console.log('show test page')
       },
-      onPullingDown(over: (t: number) => void) {
+      onPullingDown(over) {
         console.log('down')
-        over(1)
+        over('down')
       },
-      onPullingUp(over: (t: number) => void) {
+      onPullingUp(over) {
         console.log('up')
-        over(0)
+        over('up')
       },
       onScroll(pos: any) {
         console.log(pos)
@@ -30,10 +30,10 @@ export default defineComponent({
     }
     const greet = ref(1)
     return () => (
-      <model page={page} scroll={true}>
+      <ModelPage page={page} scroll={true}>
         <h1>hellow world!</h1>
-        <h2 style="color: red;">{{greet}}</h2>
-      </model>
+        <h2 style="color: red;">{greet}</h2>
+      </ModelPage>
     )
   },
 })

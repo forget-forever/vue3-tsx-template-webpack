@@ -1,4 +1,4 @@
-import {defineComponent, inject, reactive, ref, watch} from 'vue'
+import {defineComponent, computed, inject, reactive, ref, watch} from 'vue'
 // import store from '@/store'
 import router from '@/router'
 import globalData from '@/globalData'
@@ -12,13 +12,13 @@ export default defineComponent({
     let path = router.currentRoute.value.path
     globalData.sig = {a: 100, b: 300}
     const data = reactive({
-      param: 'aa',
+      param: 1,
       fun(){
         console.log(this.param)
       }
     })
     let greet = ref(1)
-    
+    greet = computed(() => data.param);
     // globalData.pageFunction.index && globalData.pageFunction.index()
     // console.log(inject('fun'))
 
