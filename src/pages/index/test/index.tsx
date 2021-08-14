@@ -1,16 +1,11 @@
 import { ref } from '@vue/reactivity'
-import ModelPage from '@/components/model/index.vue'
-import { IPage } from '@/components/model/type'
+import { IPage } from '@/components/ModelPage/type'
+import ModelPage from '@/components/ModelPage'
 import {defineComponent} from 'vue'
 
 export default defineComponent({
   name: 'Test',
-  props: {
-
-  },
-  components: {
-    ModelPage
-  },
+  props: { },
   setup() {
     const page: IPage = {
       onshow() {
@@ -29,11 +24,11 @@ export default defineComponent({
       }
     }
     const greet = ref(1)
-    return () => (
-      <ModelPage page={page} scroll={true}>
+    return () => (<>
+      <ModelPage page={page} style={{height: '100vh'}}>
         <h1>hellow world!</h1>
         <h2 style="color: red;">{greet}</h2>
       </ModelPage>
-    )
+    </>)
   },
 })

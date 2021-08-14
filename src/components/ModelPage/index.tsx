@@ -1,51 +1,27 @@
-<template>
-  <div class="scroll-wrapper" :style="style" ref="ele">
-    <div class="scroll-content">
-      <slot></slot>
-    </div>
-  </div>
-</template>
-<script lang="ts">
 import BScroll from 'better-scroll'
-import { onMounted } from '@vue/runtime-core'
-import { watchEffect } from 'vue'
+import { onMounted, PropType, ref } from '@vue/runtime-core'
+import { CSSProperties, defineComponent, watchEffect } from 'vue'
 import router from '@/router'
-// eslint-disable-next-line no-unused-vars
-import { IData, IPage } from './type'
+import { IPage } from './type'
 
-interface IProps {
-  page: IPage
-  scroll?: boolean
-  style: object
-}
-
-export default {
-  name: 'Model',
+export default defineComponent({
+  name: 'ModelPage',
   props: {
     page: {
-      type: Object,
-      default: () => ({})
-    },
-    style: {
-      type: Object,
-      default: () => ({})
+      type: Object as PropType<IPage>,
+      required: true
     },
     scroll: {
       type: Boolean,
       default: false
+    },
+    style: {
+      type: Object as PropType<CSSProperties>,
+      default: () => ({})
     }
   },
-  setup(props: IProps) {
-    // const {page} = props
-    // props.page.fun('do')
-    // console.log(emit)
-    // if (!props.style.height) {
-    //   props.style.height = '100vh'
-    // }
-    // const page = props.page
-    const data: IData = {
-      ele: null
-    }
+  setup(props) {
+    const ele = ref<HTMLDivElement>()
     const path = router.currentRoute.value.path
     watchEffect(() => {
       // aa.value = globalData.a
@@ -54,7 +30,7 @@ export default {
       }
     })
     const initBS = function(){
-      const bs = new BScroll(data.ele, {
+      const bs = new BScroll(ele.value as HTMLDivElement, {
         click: false,
         probeType: 0,
         startY: 0,
@@ -82,19 +58,16 @@ export default {
       }
     }
     onMounted(() => {
-      if(!data.ele.style.height){
-        data.ele.style.height = '100vh'
-      }
       if(props.scroll){
         initBS()
       }
     })
-    return data
+    return () => (
+      <div class="scroll-wrapper" style={{...props.style, overflow: 'hidden'}} ref={ele}>
+        <div class="scroll-content">
+          <slot></slot>
+        </div>
+      </div>
+    )
   },
-}
-</script>
-<style lang="less">
-.scroll-wrapper{
-  overflow: hidden;
-}
-</style>
+})
