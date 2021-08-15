@@ -1,7 +1,6 @@
 import { computed, ref, watchEffect, defineComponent } from 'vue'
-// import store from '@/store'
+import store from '@/store'
 import router from '@/router'
-import globalData from '@/globalData'
 import { ElOption, ElSelect } from 'element-plus'
 import Infinite from '@/components/Infinite'
 
@@ -11,22 +10,18 @@ export default defineComponent({
     const go = (url: string) => {
       router.push(url)
     }
-    console.log(this, 'this')
 
     let greet = ref(1)
     let aa = ref(1)
     // setInterval(() => {
     //   greet.value = greet.value + 1
     // }, 1000)
-    let fun = () => {
-      console.log(aa, 'from home component')
-    }
-    globalData.pageFunction.index = fun
     // provide('fun', fun)
     const selectVal = ref<string>("1")
     const inputVal = ref<string>("")
     watchEffect(() => {
       console.log(selectVal.value);
+      console.log(store.state.test)
     })
     return () => (<>
       <ElSelect defaultFirstOption v-model={selectVal.value}>

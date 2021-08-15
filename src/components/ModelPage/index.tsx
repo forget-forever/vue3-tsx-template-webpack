@@ -5,26 +5,16 @@ import router from '@/router'
 import { IPage } from './type'
 
 export default defineComponent({
-  name: 'ModelPage',
   props: {
-    page: {
-      type: Object as PropType<IPage>,
-      required: true
-    },
-    scroll: {
-      type: Boolean,
-      default: false
-    },
-    style: {
-      type: Object as PropType<CSSProperties>,
-      default: () => ({})
-    }
+    page: { type: Object as PropType<IPage>, required: true },
+    scroll: { type: Boolean, default: false },
+    style: { type: Object as PropType<CSSProperties>, default: { } }
   },
-  setup(props) {
+  setup(props, {slots, attrs}) {
     const ele = ref<HTMLDivElement>()
     const path = router.currentRoute.value.path
     watchEffect(() => {
-      // aa.value = globalData.a
+      
       if (path === router.currentRoute.value.path) {
         props.page.onshow && props.page.onshow()
       }
@@ -65,7 +55,7 @@ export default defineComponent({
     return () => (
       <div class="scroll-wrapper" style={{...props.style, overflow: 'hidden'}} ref={ele}>
         <div class="scroll-content">
-          <slot></slot>
+          {slots.default && slots.default('11')}
         </div>
       </div>
     )
