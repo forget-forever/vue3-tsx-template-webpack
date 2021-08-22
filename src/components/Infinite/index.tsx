@@ -21,7 +21,7 @@ export default <P extends Record<string, string>, R>() => (
   defineComponent({
     name: 'Infinite',
     props: {
-      mapping: {type: Object as PropType<(item: R) => P>, required: true}
+      mapping: {type: Function as PropType<(item: R) => P>, required: true}
     },
     setup(props) {
 
