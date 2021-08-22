@@ -1,35 +1,43 @@
 import request from "@/utils/request";
-import { defineComponent, onMounted, ref } from "@vue/runtime-core";
+import { defineComponent, onMounted, PropType, ref } from "@vue/runtime-core";
 
 
 type IData = {
-errmsg?: string
-errno: number
-data?: {
-total: number
-pageSize: number
-current: number
-totalPage: number
-list?: {
-columnName: string
-tableName: number
-dbName: string
-columnComment: string
-}[]
-}
+  id: number;
+  studentID: string;
+  avatar: string;
+  text: string;
+  name: string;
+  userName: string;
+  good: string[];
+  talk: number;
+  type: string;
+  imgUrl: string;
+  time: string;
+  view: number;
 }
 
-export default defineComponent({
-  name: 'Infinite',
-  setup() {
-    onMounted(async () => {
-      // const res = await request('/hive/hivetable/getHivePartitionInfo');
-      const res = await request.get<IData>('/hive/hivetable/searchHiveCloumnsInfo')
-      console.log(res);
-    })
-    const str = ref('aaaa')
-    return <>
-      <div>{str}</div>
-    </>
-  }
-})
+export default <P extends Record<string, string>, R>() => (
+  defineComponent({
+    name: 'Infinite',
+    props: {
+      mapping: {type: Object as PropType<(item: R) => P>, required: true}
+    },
+    setup(props) {
+
+      onMounted(async () => {
+        const res = await request.get<IData>('/api/v1/selectMoment', {
+          params: {
+            studentID: '',
+            page: 2,
+            type: '',
+            text: 'zml123a'
+          }
+        })
+      })
+
+      return () => (<>
+        <div>aaaa</div>
+      </>)
+    }
+  }))

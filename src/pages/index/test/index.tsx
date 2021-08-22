@@ -37,8 +37,8 @@ export default defineComponent({
         {{
           default: () => (<>
             <h1>hellow world!</h1>
-            <h2 onClick={() => {greet.value += 1}}>2222</h2>
-            <ElSelect defaultFirstOption v-model={selectVal.value}>
+            <h2 onClick={() => {greet.value += 1}}>{greet.value}</h2>
+            <ElSelect defaultFirstOption {...{onChange: (e: any) => console.log(e)}} v-model={selectVal.value}>
               <ElOption value="1" label="aaaa"></ElOption>
               <ElOption value="2" label="abbba"></ElOption>
               <ElOption value="3" label="aarfrdfcr"></ElOption>

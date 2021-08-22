@@ -2,11 +2,12 @@ import { computed, ref, watchEffect, defineComponent } from 'vue'
 import store from '@/store'
 import router from '@/router'
 import { ElOption, ElSelect } from 'element-plus'
-import Infinite from '@/components/Infinite'
+import InfiniteSource from '@/components/Infinite'
 
 export default defineComponent({
   name: 'Index',
   setup() {
+    const Infinite = InfiniteSource<{aa: string, na: string}, string>()
     const go = (url: string) => {
       router.push(url)
     }
@@ -34,7 +35,10 @@ export default defineComponent({
       <div onClick={() => go('/home')}>here is index page, click to home</div>
       aa: {aa.value}
       <h1 onClick={() => go('/test')}>to test model</h1>
-      <Infinite />
+      <Infinite mapping={(e) => ({
+        aa: e,
+        na: e
+      })}></Infinite>
     </>);
   }
 })
