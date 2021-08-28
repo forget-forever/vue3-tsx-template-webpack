@@ -7,7 +7,7 @@ module.exports = {
     host: "localhost", //表示启动的时候使用的域名，默认可以不写，则是使用localhost和本机IP
     port: '8081', // 设置端口号
     https: false,  //是否使用https协议
-    hotOnly: false, //是否开启热更新
+    hotOnly: true, //是否开启热更新
     proxy: {
       '/api': {
         target: 'https://m.zhoumeilei.cn', //API服务器的地址

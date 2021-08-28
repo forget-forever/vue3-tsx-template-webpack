@@ -3,11 +3,12 @@ import store from '@/store'
 import router from '@/router'
 import { ElOption, ElSelect } from 'element-plus'
 import InfiniteSource from '@/components/Infinite'
+import { IData } from './type'
 
 export default defineComponent({
   name: 'Index',
   setup() {
-    const Infinite = InfiniteSource<{aa: string, na: string}, string>()
+    const Infinite = InfiniteSource<{aa: string, na: string}, IData>()
     const go = (url: string) => {
       router.push(url)
     }
@@ -30,15 +31,16 @@ export default defineComponent({
         <ElOption value="2" label="abbba"></ElOption>
         <ElOption value="3" label="aarfrdfcr"></ElOption>
       </ElSelect>
-      {/* <ElInput change={(val: any) => console.log(val)} v-model={inputVal} /> */}
+      {/* <ElInput change={(val: any) => console.log(val)} v-model={inputVal.value} /> */}
       greet1: {greet.value}
       <div onClick={() => go('/home')}>here is index page, click to home</div>
       aa: {aa.value}
       <h1 onClick={() => go('/test')}>to test model</h1>
-      <Infinite mapping={(e) => ({
-        aa: e,
-        na: e
-      })}></Infinite>
+      <Infinite mapping={(item) => ({
+        title: item.text,
+        name: item.userName,
+        time: item.time
+      })} />
     </>);
   }
 })
