@@ -15,6 +15,7 @@ export default defineComponent({
 
     let greet = ref(1)
     let aa = ref(1)
+    console.log(aa)
     // setInterval(() => {
     //   greet.value = greet.value + 1
     // }, 1000)
@@ -40,7 +41,8 @@ export default defineComponent({
         title: item.text,
         name: item.userName,
         time: item.time
-      })} />
+      })} 
+      />
     </>);
   }
 })

@@ -74,6 +74,12 @@ export default class Infinite<P, T> {
   }
 
   private async getData(mode: 'next' | 'pre', params: P, refresh?: boolean) {
+    if (this.loading) {
+      return Promise.reject(new Error('loading'));
+    }
+    if (this.finish) {
+      return Promise.reject(new Error('finished'));
+    }
     try {
       let { current } = this.params;
       const { pageSize } = this.params;
