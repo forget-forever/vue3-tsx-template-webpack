@@ -1,4 +1,4 @@
-import { computed, ref, watchEffect, defineComponent } from 'vue'
+import { computed, ref, watchEffect, defineComponent, reactive } from 'vue'
 import store from '@/store'
 import router from '@/router'
 import { ElOption, ElSelect } from 'element-plus'
@@ -12,6 +12,7 @@ export default defineComponent({
     const go = (url: string) => {
       router.push(url)
     }
+    const obj = reactive({a: 1, b: 1})
 
     let greet = ref(1)
     let aa = ref(1)
