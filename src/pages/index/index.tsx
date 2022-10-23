@@ -21,8 +21,8 @@ export default defineComponent({
     //   greet.value = greet.value + 1
     // }, 1000)
     // provide('fun', fun)
-    const selectVal = ref<string>("1")
-    const inputVal = ref<string>("")
+    const selectVal = ref("1")
+    const inputVal = ref("")
     watchEffect(() => {
       console.log(selectVal.value);
       console.log(store.state.test)
