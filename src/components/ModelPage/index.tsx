@@ -55,7 +55,7 @@ export default defineComponent({
     return () => (
       <div class="scroll-wrapper" style={{...props.style, overflow: 'hidden'}} ref={ele}>
         <div class="scroll-content">
-          {slots.default && slots.default('11')}
+          {slots.default?.('11')}
         </div>
       </div>
     )
